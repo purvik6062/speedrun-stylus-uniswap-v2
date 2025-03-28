@@ -18,8 +18,8 @@ Before starting, ensure you have the following installed:
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/abhi152003/speedrun-rust.git
-cd speedrun-rust
+git clone https://github.com/abhi152003/speedrun_stylus.git
+cd speedrun_stylus
 git checkout stylus-uniswap
 ```
 
