@@ -34,10 +34,10 @@ interface TransactionArgs {
   initialize: [string, string, string, { gasLimit?: number }?] | any;
   mint: [string, { gasLimit?: number }?];
   burn: [string, { gasLimit?: number }?];
-  swap: [Number, Number, string, any[], { gasLimit?: number }?] | any;
-  transfer: [string, Number, { gasLimit?: number }?] | any;
-  approve: [string, Number, { gasLimit?: number }?] | any;
-  transferFrom: [string, string, Number, { gasLimit?: number }?] | any;
+  swap: [number, number, string, any[], { gasLimit?: number }?] | any;
+  transfer: [string, number, { gasLimit?: number }?] | any;
+  approve: [string, number, { gasLimit?: number }?] | any;
+  transferFrom: [string, string, number, { gasLimit?: number }?] | any;
 }
 
 // Tab type for better organization
@@ -50,7 +50,6 @@ const TABS = {
 
 export default function UniswapInterface() {
   // Contract connection states
-  const [provider, setProvider] = useState<any>(null);
   const [contract, setContract] = useState<any>(null);
   const [activeTab, setActiveTab] = useState<any>(TABS.INFO);
   const [loading, setLoading] = useState(false);
@@ -87,7 +86,7 @@ export default function UniswapInterface() {
 
   useEffect(() => {
     initializeContract();
-  }, []);
+  }, []);  // eslint-disable-line react-hooks/exhaustive-deps
 
   const initializeContract = async () => {
     try {
@@ -97,7 +96,6 @@ export default function UniswapInterface() {
       const contractAddress = "0xa6e41ffd769491a42a6e5ce453259b93983a22ef";
       const contract = new ethers.Contract(contractAddress, IUniswapV2, signer);
       console.log("contract", contract);
-      setProvider(provider);
       setContract(contract);
       await fetchContractInfo(contract);
     } catch (err) {
@@ -187,8 +185,9 @@ export default function UniswapInterface() {
     try {
       const balance = await contract.balanceOf(forms.balanceCheck.address);
       setResults(prev => ({ ...prev, balance: ethers.formatEther(balance) }));
-    } catch (err) {
+    } catch (error) {
       setError("Failed to check balance");
+      console.error(error);
     }
   };
 
@@ -196,8 +195,9 @@ export default function UniswapInterface() {
     try {
       const allowance = await contract.allowance(forms.allowanceCheck.owner, forms.allowanceCheck.spender);
       setResults(prev => ({ ...prev, allowance: ethers.formatEther(allowance) }));
-    } catch (err) {
+    } catch (error) {
       setError("Failed to check allowance");
+      console.error(error);
     }
   };
 
@@ -209,11 +209,10 @@ export default function UniswapInterface() {
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`flex-1 py-2 px-4 rounded-lg transition-colors ${
-              activeTab === tab
+            className={`flex-1 py-2 px-4 rounded-lg transition-colors ${activeTab === tab
                 ? "bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 shadow"
                 : "text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
-            }`}
+              }`}
           >
             {tab}
           </button>

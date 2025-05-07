@@ -79,13 +79,13 @@ bash run-dev-node.sh
 
 > The app will be available at [http://localhost:3000](http://localhost:3000) as shown below.
 
-![Uniswap Interface](https://github.com/user-attachments/assets/86564164-f989-40ba-9222-5fee8b1fdd88)
+![uniswap-frontend](https://github.com/user-attachments/assets/7a12f121-c50f-4825-bf0e-08c61126b2e1)
 
 ## Checkpoint 2: 💫 Explore the Features
 
 ### 1. Pool Initialization
 
-![Pool Initialization Interface](https://github.com/user-attachments/assets/5902fef2-ab72-489a-82ce-431e85736711)
+![pool-init](https://github.com/user-attachments/assets/445d1d9f-6de0-4b81-b4d7-2cecd6aa488f)
 *Pool initialization interface and process flow*
 
 - Navigate to the "Liquidity Operations" tab in the frontend.
@@ -101,7 +101,7 @@ bash run-dev-node.sh
 
 ### 2. Liquidity Management
 
-![Liquidity Management Interface](https://github.com/user-attachments/assets/aa32f692-de93-41f2-8b50-972619580ce4)
+![liquidity-manage](https://github.com/user-attachments/assets/2156c518-affc-4af2-b295-106ee6aebead)
 *Liquidity management interface and process flow*
 
 #### Add Liquidity (Mint)
@@ -119,7 +119,7 @@ bash run-dev-node.sh
 
 ### 3. Token Swaps
 
-![Token Swap Interface](https://github.com/user-attachments/assets/c7220e2f-cae9-4df8-86d9-8a50474d3a46)
+![token-swap](https://github.com/user-attachments/assets/b1fc39eb-e92b-486c-a1cb-7b5c6b87e89f)
 *Token swap interface and process flow*
 
 - In the "Liquidity Operations" tab, locate the "Swap Tokens" section:
@@ -132,7 +132,7 @@ bash run-dev-node.sh
 
 ### 4. Token Transfers and Allowances
 
-![Token Transfers Interface](https://github.com/user-attachments/assets/7662bec9-0d3b-426f-a57a-46efb9900ec1)
+![token-transfers](https://github.com/user-attachments/assets/1238c4c6-4f5a-4407-8d10-079a94af4d3c)
 *Token transfers interface and process flow*
 #### Token Transfers
 - Navigate to the "Token Transfers" tab:
@@ -152,7 +152,7 @@ bash run-dev-node.sh
 
 #### Allowance Management
 
-![Allowance Management Interface](https://github.com/user-attachments/assets/0ef6dbfa-90b7-4324-9d28-75a32097f6e7)
+![allowance-mgmt](https://github.com/user-attachments/assets/45a1eaeb-6fed-46a7-97a0-5b19a0ee7673)
 *Allowances interface and process flow*
 - Navigate to the "Allowances" tab:
   1. Approve spending:
@@ -188,14 +188,14 @@ bash run-dev-node.sh
 To deploy your app to Vercel:
 
 ```bash
-yarn vercel
+vercel
 ```
 
 Follow Vercel's instructions to get a public URL.
 
 For production deployment:
 ```bash
-yarn vercel --prod
+vercel --prod
 ```
 
 ## Checkpoint 5: 📜 Contract Verification

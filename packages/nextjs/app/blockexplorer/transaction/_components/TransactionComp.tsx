@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Hash, Transaction, TransactionReceipt, createPublicClient, formatEther, formatUnits, http } from "viem";
 import { Address } from "~~/components/scaffold-eth";
-import { decodeTransactionData, getFunctionDetails } from "~~/utils/scaffold-eth";
-import { replacer } from "~~/utils/scaffold-eth/common";
+import { decodeTransactionData } from "~~/utils/scaffold-eth";
 
 const client = createPublicClient({
   chain: {
@@ -29,7 +28,6 @@ const TransactionComp = ({ txHash }: { txHash: Hash }) => {
   const router = useRouter();
   const [transaction, setTransaction] = useState<Transaction>();
   const [receipt, setReceipt] = useState<TransactionReceipt>();
-  const [functionCalled, setFunctionCalled] = useState<string>();
 
   useEffect(() => {
     if (txHash) {
@@ -41,9 +39,6 @@ const TransactionComp = ({ txHash }: { txHash: Hash }) => {
           const transactionWithDecodedData = decodeTransactionData(tx);
           setTransaction(transactionWithDecodedData);
           setReceipt(receipt);
-
-          const functionCalled = transactionWithDecodedData.input.substring(0, 10);
-          setFunctionCalled(functionCalled);
         } catch (error) {
           console.error("Error fetching transaction:", error);
         }
