@@ -1,5 +1,7 @@
 # 🚩 Challenge #4: 🔄 Uniswap V2-Stylus 
 
+> ⚠️ **Important:** Please complete **Challenge #3** first if you haven't already, as it contains essential instructions related to all upcoming challenges.
+
 🎫 Build a Uniswap V2-style liquidity pool interface with Arbitrum Stylus:
 
 👷‍♀️ In this challenge, you'll build and deploy smart contracts that enable users to interact with a Uniswap V2-style liquidity pool. You'll work with token pairs, implement liquidity management functions, and create a frontend that allows users to perform various pool operations! 🚀
@@ -18,9 +20,9 @@ Before starting, ensure you have the following installed:
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/abhi152003/speedrun_stylus.git
+git clone -b stylus-uniswap https://github.com/abhi152003/speedrun_stylus.git
 cd speedrun_stylus
-git checkout stylus-uniswap
+yarn install
 ```
 
 ## Checkpoint 1: 🚀 Start Your Dev Environment
@@ -221,3 +223,5 @@ Replace `$deployment_tx` with your deployment transaction hash.
    - Portfolio tracking
 
 Explore more challenges or contribute to this project!
+
+> 🏃 Head to your next challenge [here](https://speedrun-stylus.vercel.app/challenge/zkp-age).
