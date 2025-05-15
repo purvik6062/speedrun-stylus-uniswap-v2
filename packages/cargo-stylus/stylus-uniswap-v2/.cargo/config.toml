@@ -17,3 +17,9 @@ rustflags = [
 "-C", "link-arg=-undefined",
 "-C", "link-arg=dynamic_lookup",
 ]
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"

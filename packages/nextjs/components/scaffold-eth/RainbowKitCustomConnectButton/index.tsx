@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useNetworkColor } from "~~/hooks/scaffold-eth";
 import { useDevAccount } from "~~/hooks/scaffold-eth/useDevAccount";
 
@@ -9,8 +10,24 @@ import { useDevAccount } from "~~/hooks/scaffold-eth/useDevAccount";
 export const RainbowKitCustomConnectButton = () => {
   const networkColor = useNetworkColor();
   const { balance, address } = useDevAccount();
+  const [isCopied, setIsCopied] = useState(false);
+  console.log("Your Address", address);
 
   const formattedBalance = parseFloat(balance).toFixed(2);
+
+  const copyToClipboard = () => {
+    if (!address) return;
+    navigator.clipboard.writeText(address)
+      .then(() => {
+        setIsCopied(true);
+        setTimeout(() => {
+          setIsCopied(false);
+        }, 2000);
+      })
+      .catch(err => {
+        console.error("Failed to copy: ", err);
+      });
+  };
 
   return (
     <div className="flex items-center">
@@ -21,10 +38,22 @@ export const RainbowKitCustomConnectButton = () => {
             <span className="text-lg font-medium">{formattedBalance} ETH</span>
             <div 
               className="tooltip tooltip-bottom tooltip-primary relative" 
-              data-tip={address?.slice(0, 20) + "..." + address?.slice(-8)}
+              data-tip={isCopied ? "Copied!" : address?.slice(0, 20) + "..." + address?.slice(-8)}
             >
-              <span className="text-sm text-base-content/70 hover:text-base-content cursor-pointer">
+              <span 
+                className="text-sm text-base-content/70 hover:text-base-content cursor-pointer flex items-center"
+                onClick={copyToClipboard}
+              >
                 {address?.slice(0, 6)}...{address?.slice(-4)}
+                {isCopied ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1.5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 ml-1.5 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                )}
               </span>
               <style jsx>{`
                 .tooltip:before {

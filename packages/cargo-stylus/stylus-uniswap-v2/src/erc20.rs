@@ -1,11 +1,11 @@
-
 use core::marker::PhantomData;
 
 /// Import the Stylus SDK along with alloy primitive types for use in our program.
 use stylus_sdk::{
-    alloy_primitives::{U256, Address, B256, U160}, prelude::*,
+    alloy_primitives::{U256, Address},
+    prelude::*,
     alloy_sol_types::sol,
-    evm, block, crypto, msg, contract
+    evm, msg
 };
 
 sol! {
@@ -24,7 +24,6 @@ sol_storage! {
         uint256 total_supply;
         mapping(address => uint256) balances;
         mapping(address => mapping(address => uint256)) allowances;
-        mapping(address => uint256) nonces;
         PhantomData<T> phantom;
     }
 }
@@ -71,10 +70,12 @@ impl <T: UniswapV2ERC20Params> UniswapV2ERC20<T> {
         self._transfer(from, to, value)?;
         Ok(true)
     }
-}
 
-impl<T:UniswapV2ERC20Params> UniswapV2ERC20<T> {
-    pub fn _mint(&mut self, to: Address, value: U256) {
+    pub fn mint(&mut self, to: Address, value: U256) -> Result<bool, Vec<u8>> {
+        if to == Address::ZERO {
+            return Err("Cannot mint to the zero address".to_string().into_bytes());
+        }
+        
         let mut balance = self.balances.setter(to);
         let new_balance = balance.get() + value;
         balance.set(new_balance);
@@ -84,7 +85,11 @@ impl<T:UniswapV2ERC20Params> UniswapV2ERC20<T> {
             to,
             value,
         });
+        Ok(true)
     }
+}
+
+impl<T:UniswapV2ERC20Params> UniswapV2ERC20<T> {
     pub fn _burn(&mut self, from: Address, value: U256) {
         let mut balance = self.balances.setter(from);
         let new_balance = balance.get() - value;

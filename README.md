@@ -4,9 +4,9 @@
 
 🎫 Build a Uniswap V2-style liquidity pool interface with Arbitrum Stylus:
 
-👷‍♀️ In this challenge, you'll build and deploy smart contracts that enable users to interact with a Uniswap V2-style liquidity pool. You'll work with token pairs, implement liquidity management functions, and create a frontend that allows users to perform various pool operations! 🚀
+👷‍♀️ In this challenge, you'll build and deploy smart contracts that enable users to interact with a Uniswap V2-style liquidity pool. You'll work with token pairs, implement liquidity management functions, and create a frontend that allows users to perform various pool operations through an intuitive guided interface! 🚀
 
-🌟 The final deliverable is a full-stack application featuring token pair initialization, liquidity management, token swaps, and allowance management. Deploy your contracts to a testnet, then build and upload your app to a public web server.
+🌟 The final deliverable is a full-stack application featuring token pair initialization, liquidity management with clear explanations of how LP tokens work, and helpful information about pool operations. The guided step-by-step approach makes learning DeFi concepts easier while interacting with Arbitrum Stylus-based smart contracts. Deploy your contracts to a testnet, then build and upload your app to a public web server.
 
 ## Checkpoint 0: 📦 Environment Setup 📚
 
@@ -81,91 +81,89 @@ bash run-dev-node.sh
 
 > The app will be available at [http://localhost:3000](http://localhost:3000) as shown below.
 
-![uniswap-frontend](https://raw.githubusercontent.com/abhi152003/speedrun_stylus/stylus-uniswap/packages/nextjs/public/uniswap-frontend.png)
+![uniswap-frontend](./packages/nextjs/public/uniswap-frontend.png)
+*The Uniswap V2 interface now features a guided step-by-step process with clear explanations*
 
 ## Checkpoint 2: 💫 Explore the Features
 
-### 1. Pool Initialization
+The Uniswap V2 interface now features a guided step-by-step approach to help you understand the liquidity provision process:
 
-![pool-init](https://raw.githubusercontent.com/abhi152003/speedrun_stylus/stylus-uniswap/packages/nextjs/public/pool-init.png)
-*Pool initialization interface and process flow*
+### Step 1: Initialize Pool
 
-- Navigate to the "Liquidity Operations" tab in the frontend.
-- This feature interacts with the Pool Initializer contract.
+![pool-init](./packages/nextjs/public/pool-init.png)
+*Pool initialization interface*
+
+- In the first step, you'll initialize a Uniswap V2 pool with a token pair.
 - Required inputs:
   ```
-  Token0 Address: 0x5FbDB2315678afecb367f032d93F642f64180aa3
-  Token1 Address: 0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512
-  FeeTo Address:  0x3f1Eae7D46d88F08fc2F8ed27FCb2AB183EB2d0E
+  Token0 Address: 0x11b57fe348584f042e436c6bf7c3c3def171de49 (You can get this from the terminal where you run the dev node)
+  Token1 Address: 0xa6e41ffd769491a42a6e5ce453259b93983a22ef (You can get this from the terminal where you run the dev node)
+  FeeTo Address:  0x3f1Eae7D46d88F08fc2F8ed27FCb2AB183EB2d0E (Your address)
   ```
 - Click "Initialize Pool" to create a new liquidity pool for the token pair.
-- The transaction will require a gas limit of 10,000,000.
+- The system will remember your token addresses for the next steps.
+- After successful initialization, you'll automatically proceed to Step 2.
 
-### 2. Liquidity Management
+### Step 2: Approve Tokens
 
-![liquidity-manage](https://raw.githubusercontent.com/abhi152003/speedrun_stylus/stylus-uniswap/packages/nextjs/public/liquidity-manage.png)
-*Liquidity management interface and process flow*
+![token-approve](./packages/nextjs/public/allowance-mgmt.png)
+*Token approval interface*
 
-#### Add Liquidity (Mint)
-- Navigate to the "Liquidity Operations" tab
-- Under "Mint Liquidity" section:
-  1. Enter the recipient address in the "To Address" field (e.g. 0x3f1Eae7D46d88F08fc2F8ed27FCb2AB183EB2d0E)
-  2. Click "Mint" to add liquidity
-  3. The transaction will require a gas limit of 10,000,000
+- Before adding liquidity, you need to approve both tokens for use by the Uniswap pool contract.
+- You'll see your current token balances and existing allowances.
+- For each token:
+  1. First Mint the tokens using the "Mint 1000 Token" buttons and then click on "Refresh Token Status" button to see the minted tokens in your wallet
+  2. Enter the amount you want to approve (or leave default)
+  3. Click "Approve" button for each token
+- The interface will track your approval progress and enable you to move to Step 3 once approvals are complete.
 
-#### Remove Liquidity (Burn)
-- In the same tab, find the "Burn Liquidity" section:
-  1. Enter the recipient address for withdrawn tokens (e.g. 0x3f1Eae7D46d88F08fc2F8ed27FCb2AB183EB2d0E)
-  2. Click "Burn" to remove liquidity
-  3. The transaction will require a gas limit of 10,000,000
+### Step 3: Add Liquidity (Mint)
 
-### 3. Token Swaps
+![liquidity-add](./packages/nextjs/public/liquidity-manage.png)
+*Adding liquidity interface*
 
-![token-swap](https://raw.githubusercontent.com/abhi152003/speedrun_stylus/stylus-uniswap/packages/nextjs/public/token-swap.png)
-*Token swap interface and process flow*
+- Now you can add liquidity to the pool and receive LP tokens.
+- The interface displays:
+  1. Your current token balances and allowances
+  2. Pool information with token addresses
+  3. A detailed explanation of how liquidity provision works
+- Enter your recipient address for LP tokens (or leave default)
+- Click "Add Liquidity" to provide liquidity to the pool
+- After successful addition:
+  1. You'll receive LP tokens representing your share of the pool
+  2. The system displays your LP token balance (with both decimal and wei values)
+  3. A detailed explanation of what LP tokens represent and what happens next
 
-- In the "Liquidity Operations" tab, locate the "Swap Tokens" section:
-  1. Enter Amount0 Out (amount of first token to receive)
-  2. Enter Amount1 Out (amount of second token to receive)
-  3. Specify recipient address in the "To Address" field (e.g. 0x3f1Eae7D46d88F08fc2F8ed27FCb2AB183EB2d0E)
-  4. Note: One of the amounts must be zero
-  5. Click "Swap" to execute the token swap
-  6. The transaction will require a gas limit of 10,000,000
+**Understanding LP Tokens:**
 
-### 4. Token Transfers and Allowances
+Your LP token balance may appear small (like 0.000000000000001) because:
+- LP tokens use 18 decimals regardless of the token pair's decimals
+- This small number correctly represents your ownership share of the pool
+- As users trade through the pool, you'll earn fees proportional to your share
+- You can redeem LP tokens anytime to withdraw your tokens plus earned fees
 
-![token-transfers](https://raw.githubusercontent.com/abhi152003/speedrun_stylus/stylus-uniswap/packages/nextjs/public/token-transfers.png)
-*Token transfers interface and process flow*
-#### Token Transfers
-- Navigate to the "Token Transfers" tab:
-  1. Use "Transfer Tokens" to send tokens directly:
-     - Enter recipient address (e.g. 0x3f1Eae7D46d88F08fc2F8ed27FCb2AB183EB2d0E)
-     - Specify amount to transfer
-     - Click "Transfer"
-  2. Use "Transfer From" for approved transfers:
-     - Enter source address (e.g. 0xa6e41ffd769491a42a6e5ce453259b93983a22ef)
-     - Enter recipient address (e.g. 0x3f1Eae7D46d88F08fc2F8ed27FCb2AB183EB2d0E)
-     - Specify amount
-     - Click "Transfer From"
-  3. Check balances:
-     - Enter address to check (e.g. 0x3f1Eae7D46d88F08fc2F8ed27FCb2AB183EB2d0E)
-     - Click "Check Balance"
-     - View balance in the results section
+### Additional Information
 
-#### Allowance Management
+The guided interface helps you understand each step of the Uniswap V2 process. Some important concepts:
 
-![allowance-mgmt](https://raw.githubusercontent.com/abhi152003/speedrun_stylus/stylus-uniswap/packages/nextjs/public/allowance-mgmt.png)
-*Allowances interface and process flow*
-- Navigate to the "Allowances" tab:
-  1. Approve spending:
-     - Enter spender's address (e.g. 0xa6e41ffd769491a42a6e5ce453259b93983a22ef)
-     - Specify amount to approve
-     - Click "Approve"
-  2. Check allowances:
-     - Enter owner's address (e.g. 0x3f1Eae7D46d88F08fc2F8ed27FCb2AB183EB2d0E)
-     - Enter spender's address (e.g. 0xa6e41ffd769491a42a6e5ce453259b93983a22ef)
-     - Click "Check Allowance"
-     - View allowance in the results section
+1. **Automatic Token Deposits**: When adding liquidity, Uniswap uses the full balance of both approved tokens in your wallet, maintaining the proper ratio.
+
+2. **LP Tokens and Ownership**: The LP tokens represent your share of the pool, and they earn you a share of the 0.3% fee from each swap.
+
+3. **Token Units**: All displayed values are shown in their natural units with appropriate decimals, and raw wei values are provided for reference.
+
+4. **Error Handling**: The interface provides detailed error messages and troubleshooting suggestions for common issues.
+
+### Common Issues:
+1. Connection Error: If you see "Failed to initialize contract":
+   - Ensure the Nitro dev node is running at http://localhost:8547
+   - Check if the contract address matches your deployed contract
+
+2. Transaction Errors:
+   - Ensure you have sufficient balance for gas fees
+   - Check that input addresses are valid Ethereum addresses
+   - Verify that token amounts are properly formatted
+   - For liquidity provision, make sure both tokens are approved first
 
 ## Checkpoint 3: 🛠 Modify and Deploy Contracts
 
@@ -218,9 +216,14 @@ Replace `$deployment_tx` with your deployment transaction hash.
    - Price oracles
    - Fee management
 3. Enhance the frontend with:
-   - Price charts
-   - Transaction history
-   - Portfolio tracking
+   - Price charts and historical data
+   - LP token analytics dashboard
+   - Impermanent loss calculator
+   - Yield farming integrations
+4. Extend the guided interface with:
+   - Token swap functionality
+   - Remove liquidity flow
+   - Educational tooltips explaining DeFi concepts
 
 Explore more challenges or contribute to this project!
 

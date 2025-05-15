@@ -1,8 +1,8 @@
 export const IUniswapV2 = [
-  "function initialize(address token0, address token1, address fee_to) external",
+  "function initialize(address token0, address token1, address feeTo) external",
   "function mint(address to) external returns (uint256)",
-  "function burn(address to) external returns (uint256, uint256)",
-  "function swap(uint256 amount0_out, uint256 amount1_out, address to, uint8[] memory data) external",
+  "function token0() external view returns (address)",
+  "function token1() external view returns (address)",
   "function name() external view returns (string memory)",
   "function symbol() external view returns (string memory)",
   "function decimals() external view returns (uint8)",
