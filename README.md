@@ -34,14 +34,11 @@ yarn install
    cd packages/cargo-stylus/stylus-uniswap-v2
    ```
 
-2. Run the `run-dev-node.sh` script:
+2. Now open your Docker desktop and then return to your IDE and run the command below to spin up the nitro devnode in Docker. This will deploy the contract and generate the ABI so you can interact with the contracts written in RUST:
    ```bash
    bash run-dev-node.sh
    ```
-   This script:
-   - Spins up an Arbitrum Stylus Nitro dev node in Docker.
-   - Deploys the contract.
-   - Generates the ABI for interacting with the contract.
+   This command will spin up the nitro devnode in Docker. You can check it out in your Docker desktop. This will take some time to deploy the RUST contract, and then the script will automatically generate the ABI. You can view all these transactions in your terminal and Docker desktop. The Docker node is running at localhost:8547, but before running this command make sure about the below thing
 
 ## 🛠️ Debugging Tips
 
@@ -227,4 +224,4 @@ Replace `$deployment_tx` with your deployment transaction hash.
 
 Explore more challenges or contribute to this project!
 
-> 🏃 Head to your next challenge [here](https://speedrun-stylus.vercel.app/challenge/zkp-age).
+> 🏃 Head to your next challenge [here](https://speedrunstylus.com/challenge/zkp-age).
