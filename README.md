@@ -78,7 +78,7 @@ bash run-dev-node.sh
 
 > The app will be available at [http://localhost:3000](http://localhost:3000) as shown below.
 
-![uniswap-frontend](./packages/nextjs/public/uniswap-frontend.png)
+![uniswap-frontend](https://raw.githubusercontent.com/abhi152003/speedrun_stylus/refs/heads/stylus-uniswap/packages/nextjs/public/uniswap-frontend-new.png)
 *The Uniswap V2 interface now features a guided step-by-step process with clear explanations*
 
 ## Checkpoint 2: 💫 Explore the Features
@@ -87,7 +87,7 @@ The Uniswap V2 interface now features a guided step-by-step approach to help you
 
 ### Step 1: Initialize Pool
 
-![pool-init](./packages/nextjs/public/pool-init.png)
+![pool-init](https://raw.githubusercontent.com/abhi152003/speedrun_stylus/refs/heads/stylus-uniswap/packages/nextjs/public/pool-init-new.png)
 *Pool initialization interface*
 
 - In the first step, you'll initialize a Uniswap V2 pool with a token pair.
@@ -103,7 +103,7 @@ The Uniswap V2 interface now features a guided step-by-step approach to help you
 
 ### Step 2: Approve Tokens
 
-![token-approve](./packages/nextjs/public/allowance-mgmt.png)
+![token-approve](https://raw.githubusercontent.com/abhi152003/speedrun_stylus/refs/heads/stylus-uniswap/packages/nextjs/public/allowance-mgmt-new.png)
 *Token approval interface*
 
 - Before adding liquidity, you need to approve both tokens for use by the Uniswap pool contract.
@@ -116,7 +116,7 @@ The Uniswap V2 interface now features a guided step-by-step approach to help you
 
 ### Step 3: Add Liquidity (Mint)
 
-![liquidity-add](./packages/nextjs/public/liquidity-manage.png)
+![liquidity-add](https://raw.githubusercontent.com/abhi152003/speedrun_stylus/refs/heads/stylus-uniswap/packages/nextjs/public/liquidity-manage-new.png)
 *Adding liquidity interface*
 
 - Now you can add liquidity to the pool and receive LP tokens.
