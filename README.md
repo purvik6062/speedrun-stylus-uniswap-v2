@@ -61,19 +61,21 @@ bash run-dev-node.sh
 
 ### Step 2: Start the Frontend
 
-1. Navigate to the `nextjs` folder:
-   ```bash
-   cd ../../nextjs
-   ```
+Before running the frontend, you need to set the environment variables in the .env file.
 
-2. Install dependencies:
+```bash
+cd packages/nextjs
+cp .env.example .env
+```
+
+1. Install dependencies:
    ```bash
    yarn install
    ```
 
-3. Start the development server:
+2. Start the development server:
    ```bash
-   yarn dev
+   yarn run dev
    ```
 
 > The app will be available at [http://localhost:3000](http://localhost:3000) as shown below.
@@ -223,5 +225,44 @@ Replace `$deployment_tx` with your deployment transaction hash.
    - Educational tooltips explaining DeFi concepts
 
 Explore more challenges or contribute to this project!
+
+---
+
+## 🚀 Deploying to Arbitrum Sepolia
+
+If you want to deploy your Multisig Wallet contract to the Arbitrum Sepolia testnet, follow these steps:
+
+1. **Export your private key in the terminal**
+   ```bash
+   export PRIVATE_KEY=your_private_key_of_your_ethereum_wallet
+   ```
+
+2. **Run the Sepolia Deployment Script**
+   ```bash
+   cd packages/cargo-stylus/multisig_wallet
+   bash run-sepolia-deploy.sh
+   ```
+   This will deploy your contract to Arbitrum Sepolia and output the contract address and transaction hash.
+
+3. **Configure the Frontend for Sepolia**
+   - Go to the `packages/nextjs` directory:
+     ```bash
+     cd packages/nextjs
+     cp .env.example .env
+     ```
+   - Open the `.env` file and set the following variables:
+     ```env
+     NEXT_PUBLIC_RPC_URL=https://sepolia-rollup.arbitrum.io/rpc
+     NEXT_PUBLIC_PRIVATE_KEY=your_private_key_of_your_ethereum_wallet
+     ```
+     Replace `your_private_key_of_your_ethereum_wallet` with your actual Ethereum wallet private key (never share this key publicly).
+
+4. **Start the Frontend**
+   ```bash
+   yarn run dev
+   ```
+   Your frontend will now connect to the Arbitrum Sepolia network and interact with your deployed contract.
+
+---
 
 > 🏃 Head to your next challenge [here](https://speedrunstylus.com/challenge/zkp-age).

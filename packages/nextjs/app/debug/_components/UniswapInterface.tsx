@@ -185,11 +185,11 @@ export default function UniswapInterface() {
 
   const initializeContract = async () => {
     try {
-      const provider = new ethers.JsonRpcProvider("http://localhost:8547/");
-      const privateKey = "0xb6b15c8cb491557369f3c7d2c287b053eb229daa9c22138887752191c9520659";
+      const provider = new ethers.JsonRpcProvider(process.env.NEXT_PUBLIC_RPC_URL || '');
+      const privateKey = process.env.NEXT_PUBLIC_PRIVATE_KEY || '';
       const signer = new ethers.Wallet(privateKey, provider);
       const signerAddress = await signer.getAddress();
-      const uniswapContractAddress = "0xe1080224b632a93951a7cfa33eeea9fd81558b5e";
+      const uniswapContractAddress = "0x525c2aba45f66987217323e8a05ea400c65d06dc";
       const uniswapContract = new ethers.Contract(uniswapContractAddress, IUniswapV2, signer);
       console.log("contract", uniswapContract);
       setContract(uniswapContract);
@@ -371,8 +371,8 @@ export default function UniswapInterface() {
 
         // Validate or default the recipient address
         if (!args[0] || args[0] === "") {
-          const provider = new ethers.JsonRpcProvider("http://localhost:8547/");
-          const privateKey = "0xb6b15c8cb491557369f3c7d2c287b053eb229daa9c22138887752191c9520659";
+          const provider = new ethers.JsonRpcProvider(process.env.NEXT_PUBLIC_RPC_URL || '');
+          const privateKey = process.env.NEXT_PUBLIC_PRIVATE_KEY || '';
           const signer = new ethers.Wallet(privateKey, provider);
           const signerAddress = await signer.getAddress();
           args[0] = signerAddress;
@@ -479,8 +479,8 @@ export default function UniswapInterface() {
         return;
       }
 
-      const provider = new ethers.JsonRpcProvider("http://localhost:8547/");
-      const privateKey = "0xb6b15c8cb491557369f3c7d2c287b053eb229daa9c22138887752191c9520659";
+      const provider = new ethers.JsonRpcProvider(process.env.NEXT_PUBLIC_RPC_URL || '');
+      const privateKey = process.env.NEXT_PUBLIC_PRIVATE_KEY || '';
       const signer = new ethers.Wallet(privateKey, provider);
       const signerAddress = await signer.getAddress();
 
@@ -637,8 +637,8 @@ export default function UniswapInterface() {
     });
 
     try {
-      const provider = new ethers.JsonRpcProvider("http://localhost:8547/");
-      const privateKey = "0xb6b15c8cb491557369f3c7d2c287b053eb229daa9c22138887752191c9520659";
+      const provider = new ethers.JsonRpcProvider(process.env.NEXT_PUBLIC_RPC_URL || '');
+      const privateKey = process.env.NEXT_PUBLIC_PRIVATE_KEY || '';
 
       // Create a contract instance for the token
       const tokenContract = new ethers.Contract(
@@ -696,8 +696,8 @@ export default function UniswapInterface() {
     });
 
     try {
-      const provider = new ethers.JsonRpcProvider("http://localhost:8547/");
-      const privateKey = "0xb6b15c8cb491557369f3c7d2c287b053eb229daa9c22138887752191c9520659";
+      const provider = new ethers.JsonRpcProvider(process.env.NEXT_PUBLIC_RPC_URL || '');
+      const privateKey = process.env.NEXT_PUBLIC_PRIVATE_KEY || '';
 
       // Create a contract instance for the token
       const tokenContract = new ethers.Contract(
@@ -828,8 +828,8 @@ export default function UniswapInterface() {
         operation: "mintTokens"
       });
 
-      const provider = new ethers.JsonRpcProvider("http://localhost:8547/");
-      const privateKey = "0xb6b15c8cb491557369f3c7d2c287b053eb229daa9c22138887752191c9520659";
+      const provider = new ethers.JsonRpcProvider(process.env.NEXT_PUBLIC_RPC_URL || '');
+      const privateKey = process.env.NEXT_PUBLIC_PRIVATE_KEY || '';
       const signer = new ethers.Wallet(privateKey, provider);
       const signerAddress = await signer.getAddress();
 
@@ -912,8 +912,8 @@ export default function UniswapInterface() {
         operation: "approveToken"
       });
 
-      const provider = new ethers.JsonRpcProvider("http://localhost:8547/");
-      const privateKey = "0xb6b15c8cb491557369f3c7d2c287b053eb229daa9c22138887752191c9520659";
+      const provider = new ethers.JsonRpcProvider(process.env.NEXT_PUBLIC_RPC_URL || '');
+      const privateKey = process.env.NEXT_PUBLIC_PRIVATE_KEY || '';
       const signer = new ethers.Wallet(privateKey, provider);
 
       // Create a contract instance for the token to approve
@@ -1440,8 +1440,8 @@ export default function UniswapInterface() {
                       // Ensure we have a valid recipient address, defaulting to the signer address if empty
                       const ensureValidAddress = async () => {
                         if (!forms.mint.to) {
-                          const provider = new ethers.JsonRpcProvider("http://localhost:8547/");
-                          const privateKey = "0xb6b15c8cb491557369f3c7d2c287b053eb229daa9c22138887752191c9520659";
+                          const provider = new ethers.JsonRpcProvider(process.env.NEXT_PUBLIC_RPC_URL || '');
+                          const privateKey = process.env.NEXT_PUBLIC_PRIVATE_KEY || '';
                           const signer = new ethers.Wallet(privateKey, provider);
                           const signerAddress = await signer.getAddress();
                           updateForm("mint", "to", signerAddress);
