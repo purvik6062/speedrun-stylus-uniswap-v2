@@ -164,6 +164,33 @@ The guided interface helps you understand each step of the Uniswap V2 process. S
    - Verify that token amounts are properly formatted
    - For liquidity provision, make sure both tokens are approved first
 
+## 📊 Performance Tracking
+
+Before submitting your challenge, you can run the performance tracking script to analyze your application:
+
+1. **Navigate to the performance tracking directory:**
+
+   ```bash
+   cd packages/nextjs/services/web3
+   ```
+
+2. **Update the contract address:**
+   Open the `performanceTracking.js` file and paste the contract address that was deployed on your local node. (you can get contract address same as we have mentioned above in Docker_Img)
+
+3. **Run the performance tracking script:**
+   ```bash
+   node performanceTracking.js
+   ```
+
+This will provide insights about the savings when you cache your deployed contract. The output will show performance analysis similar to the image below:
+
+![image](https://raw.githubusercontent.com/purvik6062/speedrun_stylus/refs/heads/counter/assets/performance.png)
+
+> 📝 **Important**: Make sure to note down the **Latency Improvement** and **Gas Savings** values from the output, as you'll need to include these metrics when submitting your challenge.
+
+---
+
+
 ## Checkpoint 3: 🛠 Modify and Deploy Contracts
 
 You can modify the contract logic by editing files in the `packages/cargo-stylus/src` folder. After making changes, redeploy by running:
