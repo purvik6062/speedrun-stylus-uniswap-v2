@@ -156,7 +156,7 @@ echo "Tokens minted to deployer address."
 
 # Deploy the Uniswap V2 contract using cargo stylus
 echo "Deploying the Uniswap V2 contract to Arbitrum Sepolia using cargo stylus..."
-uniswap_deploy_output=$(cargo stylus deploy -e "$SEPOLIA_RPC_URL" --private-key "$PRIVATE_KEY" 2>&1)
+uniswap_deploy_output=$(cargo stylus deploy -e "$SEPOLIA_RPC_URL" --private-key "$PRIVATE_KEY" --no-verify 2>&1)
 
 # Check if deployment was successful
 if [[ $? -ne 0 ]]; then
