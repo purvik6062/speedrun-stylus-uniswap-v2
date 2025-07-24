@@ -80,7 +80,6 @@ echo "Deployer address: $deployer_address"
 
 # Deploy two ERC20 token contracts for testing Uniswap V2
 echo "Deploying first ERC20 token contract (Token0) to Arbitrum Sepolia..."
-cargo stylus deploy -e "$SEPOLIA_RPC_URL" --private-key "$PRIVATE_KEY" --no-verify 
 token0_deploy_output=$(cargo stylus deploy -e "$SEPOLIA_RPC_URL" --private-key "$PRIVATE_KEY" --no-verify 2>&1)
 
 # Check if deployment was successful
@@ -118,7 +117,6 @@ if [[ ! -z "$token0_tx" ]]; then
 fi
 
 echo "Deploying second ERC20 token contract (Token1) to Arbitrum Sepolia..."
-cargo stylus deploy -e "$SEPOLIA_RPC_URL" --private-key "$PRIVATE_KEY" --no-verify
 token1_deploy_output=$(cargo stylus deploy -e "$SEPOLIA_RPC_URL" --private-key "$PRIVATE_KEY" --no-verify 2>&1)
 
 # Check if deployment was successful
@@ -164,7 +162,6 @@ echo "Tokens minted to deployer address."
 
 # Deploy the Uniswap V2 contract using cargo stylus
 echo "Deploying the Uniswap V2 contract to Arbitrum Sepolia using cargo stylus..."
-cargo stylus deploy -e "$SEPOLIA_RPC_URL" --private-key "$PRIVATE_KEY" --no-verify 
 uniswap_deploy_output=$(cargo stylus deploy -e "$SEPOLIA_RPC_URL" --private-key "$PRIVATE_KEY" --no-verify 2>&1)
 
 # Check if deployment was successful
