@@ -1,5 +1,11 @@
 #!/bin/bash
 
+
+# Load environment variables from .env file
+if [ -f .env ]; then
+  source .env
+fi
+
 # Exit on error
 set -e
 
@@ -48,32 +54,33 @@ echo "Deployer address: $deployer_address"
 
 # NOTE: Skipping chain owner setup and cache manager registration on Sepolia (requires chain owner permissions).
 
-# Deploy Cache Manager Contract
-echo "Deploying Cache Manager contract to Arbitrum Sepolia..."
-cache_manager_bytecode="0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220d62f2a51e8c5c1e1b4b9b3f8e6c49b6c2cce76a9c40d30b23ddcf332156fbd0564736f6c63430008110033"
-cache_deploy_output=$(cast send --private-key "$PRIVATE_KEY" \
-  --rpc-url "$SEPOLIA_RPC_URL" \
-  --create "$cache_manager_bytecode")
+# # Deploy Cache Manager Contract
+# echo "Deploying Cache Manager contract to Arbitrum Sepolia..."
+# cache_manager_bytecode="0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220d62f2a51e8c5c1e1b4b9b3f8e6c49b6c2cce76a9c40d30b23ddcf332156fbd0564736f6c63430008110033"
+# cache_deploy_output=$(cast send --private-key "$PRIVATE_KEY" \
+#   --rpc-url "$SEPOLIA_RPC_URL" \
+#   --create "$cache_manager_bytecode")
 
-# Extract cache manager contract address using robust pattern
-cache_manager_address=$(echo "$cache_deploy_output" | grep "contractAddress" | grep -oE '0x[a-fA-F0-9]{40}')
+# # Extract cache manager contract address using robust pattern
+# cache_manager_address=$(echo "$cache_deploy_output" | grep "contractAddress" | grep -oE '0x[a-fA-F0-9]{40}')
 
-# Fallback extraction if above pattern doesn't work
-if [[ -z "$cache_manager_address" ]]; then
-  cache_manager_address=$(echo "$cache_deploy_output" | grep -i "contract\|deployed" | grep -oE '0x[a-fA-F0-9]{40}' | head -1)
-fi
+# # Fallback extraction if above pattern doesn't work
+# if [[ -z "$cache_manager_address" ]]; then
+#   cache_manager_address=$(echo "$cache_deploy_output" | grep -i "contract\|deployed" | grep -oE '0x[a-fA-F0-9]{40}' | head -1)
+# fi
 
-if [[ -z "$cache_manager_address" ]]; then
-  echo "Error: Failed to extract Cache Manager contract address. Full output:"
-  echo "$cache_deploy_output"
-  exit 1
-fi
+# if [[ -z "$cache_manager_address" ]]; then
+#   echo "Error: Failed to extract Cache Manager contract address. Full output:"
+#   echo "$cache_deploy_output"
+#   exit 1
+# fi
 
-echo "Cache Manager deployed at: $cache_manager_address"
-echo "NOTE: Skipping WASM cache manager registration on Sepolia (requires chain owner permissions)."
+# echo "Cache Manager deployed at: $cache_manager_address"
+# echo "NOTE: Skipping WASM cache manager registration on Sepolia (requires chain owner permissions)."
 
 # Deploy two ERC20 token contracts for testing Uniswap V2
 echo "Deploying first ERC20 token contract (Token0) to Arbitrum Sepolia..."
+cargo stylus deploy -e "$SEPOLIA_RPC_URL" --private-key "$PRIVATE_KEY" --no-verify 
 token0_deploy_output=$(cargo stylus deploy -e "$SEPOLIA_RPC_URL" --private-key "$PRIVATE_KEY" --no-verify 2>&1)
 
 # Check if deployment was successful
@@ -111,6 +118,7 @@ if [[ ! -z "$token0_tx" ]]; then
 fi
 
 echo "Deploying second ERC20 token contract (Token1) to Arbitrum Sepolia..."
+cargo stylus deploy -e "$SEPOLIA_RPC_URL" --private-key "$PRIVATE_KEY" --no-verify
 token1_deploy_output=$(cargo stylus deploy -e "$SEPOLIA_RPC_URL" --private-key "$PRIVATE_KEY" --no-verify 2>&1)
 
 # Check if deployment was successful
@@ -156,6 +164,7 @@ echo "Tokens minted to deployer address."
 
 # Deploy the Uniswap V2 contract using cargo stylus
 echo "Deploying the Uniswap V2 contract to Arbitrum Sepolia using cargo stylus..."
+cargo stylus deploy -e "$SEPOLIA_RPC_URL" --private-key "$PRIVATE_KEY" --no-verify 
 uniswap_deploy_output=$(cargo stylus deploy -e "$SEPOLIA_RPC_URL" --private-key "$PRIVATE_KEY" --no-verify 2>&1)
 
 # Check if deployment was successful
@@ -199,16 +208,16 @@ echo "Uniswap V2 contract address: $uniswap_address"
 
 ############################################
 # Generate the ABI for the deployed contract
-echo "Generating ABI for the deployed contract..."
-cargo stylus export-abi > stylus-contract.abi
+# echo "Generating ABI for the deployed contract..."
+# cargo stylus export-abi > stylus-contract.abi
 
-# Verify if ABI generation was successful
-if [[ $? -ne 0 ]]; then
-  echo "Error: ABI generation failed."
-  exit 1
-fi
+# # Verify if ABI generation was successful
+# if [[ $? -ne 0 ]]; then
+#   echo "Error: ABI generation failed."
+#   exit 1
+# fi
 
-echo "ABI generated successfully and saved to stylus-contract.abi"
+# echo "ABI generated successfully and saved to stylus-contract.abi"
 
 # Create build directory if it doesn't exist
 mkdir -p build
